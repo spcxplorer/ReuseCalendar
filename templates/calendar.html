@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %} Reuse Calendar {% endblock %}
+
+{% block content %}
+<form method="post">
+    <div class="input-group mb-3 mx-auto w-50">
+        <input type="text" name="phase_tolerance"
+               placeholder="3.5" class="form-control"
+               aria-label="Lunar phase tolerance (days)"
+               aria-describedby="button_addon"
+               value="{{ request.form['phase_tolerance'] }}">
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-primary" id="button_addon">Apply Lunar Phase Tolerance</button>
+        </div>
+    </div>
+</form>
+
+<table class="table table-dark table-bordered table-hover text-center">
+  <thead class="bg-primary">
+    <tr>
+      <th scope="col">Past</th>
+      <th scope="col">Year</th>
+      <th scope="col">Future</th>
+    </tr>
+  </thead>
+  <tbody class="table-group-divider">
+    {% for row in year_rows %}
+    <tr>
+      <td>{% for past_year in row[1] %}
+        {% if past_year[1]['moon_phase_delta'] < phase_tolerance %}
+        {{past_year[0]}} ({{past_year[1]['moon_phase_delta']|round(1)}}),
+        {% endif %}
+        {% endfor %}
+      </td>
+      <td class="bg-primary">{{row[0].year}}</td>
+      <td>{% for future_year in row[2] %}
+        {% if future_year[1]['moon_phase_delta'] < phase_tolerance %}
+        {{future_year[0]}} ({{future_year[1]['moon_phase_delta']|round(1)}}),
+        {% endif %}
+        {% endfor %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
