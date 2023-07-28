@@ -8,3 +8,6 @@ For calendar re-users who care about lunar phase alignment.
 - Can filter results on how close the lunar phases sync up between years.
   - Decent tolerance for casual observers might be ~3.5 days.
   - Can expand range to 14+ days to view all matches regardless of lunar phase sync
+
+# Example:
+<img width="787" alt="ReuseCalendarScreenshot" src="https://github.com/spcxplorer/ReuseCalendar/assets/7537653/74fc4e47-d542-4017-b97f-f8556d74d41a">
